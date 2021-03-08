@@ -24,11 +24,6 @@ module Bundler
       when LoadError
         raise error unless error.message =~ /cannot load such file -- openssl|openssl.so|libcrypto.so/
         Bundler.ui.error "\nCould not load OpenSSL. #{error.class}: #{error}\n#{error.backtrace.join("\n  ")}"
-        Bundler.ui.warn <<-WARN, :wrap => true
-          You must recompile Ruby with OpenSSL support or change the sources in your \
-          Gemfile from 'https' to 'http'. Instructions for compiling with OpenSSL \
-          using RVM are available at https://rvm.io/packages/openssl.
-        WARN
       when Interrupt
         Bundler.ui.error "\nQuitting..."
         Bundler.ui.trace error
@@ -81,7 +76,7 @@ module Bundler
 
           I tried...
 
-        - **Have you read our issues document, https://github.com/bundler/bundler/blob/master/doc/contributing/ISSUES.md?**
+        - **Have you read our issues document, https://github.com/rubygems/bundler/blob/master/doc/contributing/ISSUES.md?**
 
           ...
 
@@ -105,7 +100,7 @@ module Bundler
         #{issues_url(e)}
 
         If there aren't any reports for this error yet, please create copy and paste the report template above into a new issue. Don't forget to anonymize any private data! The new issue form is located at:
-        https://github.com/bundler/bundler/issues/new
+        https://github.com/rubygems/bundler/issues/new
       EOS
     end
 
@@ -113,7 +108,7 @@ module Bundler
       message = exception.message.lines.first.tr(":", " ").chomp
       message = message.split("-").first if exception.is_a?(Errno)
       require "cgi"
-      "https://github.com/bundler/bundler/search?q=" \
+      "https://github.com/rubygems/bundler/search?q=" \
         "#{CGI.escape(message)}&type=Issues"
     end
   end
